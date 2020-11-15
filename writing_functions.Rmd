@@ -24,3 +24,41 @@ scale_colour_discrete = scale_colour_viridis_d
 scale_fill_discrete = scale_fill_viridis_d
 ```
 
+## Do somethign simple
+
+```{r simple}
+x_vec = rnorm(30, mean = 5, sd = 3)
+(x_vec - mean(x_vec)) / sd(x_vec)
+```
+
+I want a function to compute z-scores:
+
+```{r}
+z_scores = function(x){
+  
+  if(!is.numeric(x)) {
+    stop("Input must be numeric")
+  }
+  
+  if(length(x) < 3) {
+    stop("Input must have at least 3 numbers")
+  }
+  
+  z = (x - mean(x)) / sd(x)
+  
+  return(z)
+  
+}
+
+z_scores(x_vec)
+```
+
+Try my function on some other things that should give errors:
+
+```{r error = T}
+z_scores(3)
+z_scores("my name is david")
+z_scores(mtcars)
+z_scores(c(TRUE, TRUE, FALSE, TRUE))
+```
+
